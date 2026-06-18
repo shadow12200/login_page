@@ -5,7 +5,15 @@ function transmit(){
     const password = document.getElementById("password").value;
     const data = { username, password };
     let package=JSON.stringify(data);
-    console.log(package);
+    fetch('/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: package
+    })
+    .then(response => response.json())
+    .then(data => console.log('Data sent successfully'));
 }
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
