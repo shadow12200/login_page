@@ -1,7 +1,10 @@
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask
 
 app = Flask(__name__, static_folder="static")
 
 @app.route("/")
 def home():
-    return send_from_directory("static", "index.html")
+    return app.send_static_file("log_in.html")
+
+if __name__ == "__main__":
+    app.run(debug=True)
