@@ -39,7 +39,7 @@ def login():
     result = check_credentials(username, password)
     if result:
         token = secrets.token_hex(32)
-
+        post_session(username, token)
         response = jsonify({
             "success": True,
             "message": "Login successful"
