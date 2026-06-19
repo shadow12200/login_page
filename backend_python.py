@@ -4,7 +4,7 @@ import secrets
 
 
 app = Flask(__name__, static_folder="static")
-passwd='check123'
+passwd='ANU27.appu'
 db='login_system'
 @app.route("/")
 def home():
