@@ -1,23 +1,29 @@
 //javascript
 
-function transmit(){
+async function transmit() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    const data = { username, password };
-    let package=JSON.stringify(data);
-    fetch('/login', {
-        method: 'POST',
+
+    const response = await fetch("/login", {
+        method: "POST",
+        credentials: "include",        // <-- Important
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
-        body: package
-    })
-    .then(response => response.json())
-    .then(data => console.log('Data sent successfully'));
+        body: JSON.stringify({ username, password })
+    });
+
+    if (response.ok) {
+        window.location.href = "/protected";
+    } else {
+        alert("Invalid username or password");
+    }
 }
+
 const usernameInput = document.getElementById("username");
 const passwordInput = document.getElementById("password");
 const submitButton = document.getElementById("submit"); 
+
 
 function check_status() {
     const usernameValue = usernameInput.value;
@@ -31,5 +37,8 @@ function check_status() {
 
 usernameInput.addEventListener("input", check_status);
 passwordInput.addEventListener("input", check_status);
+
+
+
 
 check_status(); // Initial check to set the button state on page load
